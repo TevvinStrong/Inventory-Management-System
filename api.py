@@ -1,9 +1,11 @@
-# Import requirements
+# Import installed packages
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from pymongo import MongoClient
 
+# Initialize flask app
 app = Flask(__name__, template_folder="templates")
+# Prevent CORS errors
 CORS(app)
 
 # Establish MongoDB connection
@@ -12,6 +14,7 @@ client = MongoClient(mongo_uri)
 db = client["Inventroy"]
 collection = db["productMetrics"]
 
+# Render html template view responsible for the home page.
 @app.route('/', methods=['GET', 'POST'])
 def home():
     found_product = None
@@ -30,9 +33,11 @@ def home():
 
     return render_template('home.html', found_product=found_product, product_metrics=products_cursor)
 
+# Add a new product
 @app.route('/product', methods=['POST'])
 def add_product():
-    data = request.get_json()  # Parse JSON data from request body
+    # Parse JSON data from request body
+    data = request.get_json()
     
     # Check if the required fields are present
     required_fields = ['product_id', 'product_name', 'product_category', 'price', 'available_quantity']
@@ -40,6 +45,7 @@ def add_product():
     if missing_fields:
         return f"Missing fields: {', '.join(missing_fields)}", 400
     
+    # Extract the values
     product_id = data['product_id']
     product_name = data['product_name']
     product_category = data['product_category']
@@ -61,29 +67,32 @@ def add_product():
         "price": price,
         "available_quantity": available_quantity
     }
-    
+
+    # Insert into mongodb collection
     collection.insert_one(product_data)
     
     return "Product added successfully!"
 
+# Render html template view responsible for creating a product.
 @app.route('/product', methods=['GET'])
 def add_product_form():
     return render_template('add_product.html', added_product=True)
 
-# Render the update product form
+# Render html template view responsible for updating a product.
 @app.route('/products/<string:product_id>/update', methods=['GET'])
 def update_product_form(product_id):
     # Retrieve the product from MongoDB using the provided product ID
     product = collection.find_one({"product_id": product_id})
     if product is None:
-        return f"Product with ID {product_id} not found", 404
+        return f"{product_id} does not exists", 404
     
     return render_template('update_product.html', product=product)
 
-# Handle form submission for updating the product
+# Update an existing product  
 @app.route('/products/<string:product_id>/update', methods=['PUT'])
 def update_product(product_id):
-    data = request.form  # Form data
+    # Capture form data
+    data = request.form
     
     # Update the product in MongoDB
     updated_product = {
@@ -92,22 +101,23 @@ def update_product(product_id):
         "price": float(data['price']),
         "available_quantity": int(data['available_quantity'])
     }
-    
+    # Search for product_id that matches the given product_id
     collection.update_one({"product_id": product_id}, {"$set": updated_product})
     
     return "Product updated successfully!"
 
+# Render html template view responsible for product deletion.
 @app.route('/products/<string:product_id>/delete', methods=['GET'])
 def delete_product_form(product_id):
     # Retrieve the product from MongoDB based on product_id
     product = collection.find_one({"product_id": product_id})
     
     if product is None:
-        return f"Product with ID {product_id} not found", 404
+        return f"{product_id} does not exists", 404
     
     return render_template('delete_product.html', product=product)
 
-
+# Delete a product
 @app.route('/products/<string:product_id>/delete', methods=['DELETE'])
 def delete_product(product_id):
     # Delete the product from MongoDB
@@ -116,8 +126,9 @@ def delete_product(product_id):
     if result.deleted_count == 1:
         return "Product deleted successfully!", 200
     else:
-        return f"Product with ID {product_id} not found", 404
+        return f"{product_id} does not exists", 404
 
+# Render html template to view aggrageted product metrics. 
 @app.route('/products/analytics', methods=['GET'])
 def fetch_product_analytics_view():
     # Aggregate data using MongoDB aggregation pipeline
@@ -127,12 +138,13 @@ def fetch_product_analytics_view():
         {"$sort": {"total_count": -1}}
     ]
     analytics_data = list(collection.aggregate(pipeline))
-
+    # return html template responsible for the view
     return render_template('product_analytics.html', analytics_data=analytics_data)
 
+# Get aggrageted data that consist of the most popular product category, the total count of products, and the average price within that category.
 @app.route('/products/analytics', methods=['GET'])
 def fetch_product_analytics():
-    # Retrieve product data
+    # Aggregate data using MongoDB aggregation pipeline
     pipeline = [
         {
             '$group': {
@@ -148,7 +160,7 @@ def fetch_product_analytics():
             '$limit': 1
         }
     ]
-
+    # Store the results in a variable
     result = collection.aggregate(pipeline)
 
     # Format the aggregated data
@@ -159,16 +171,10 @@ def fetch_product_analytics():
             'total_count': entry['count'],
             'average_price': entry['avg_price']
         })
-
+    # Convert to a JSON response object
     return jsonify(analytics_data)
 
-
+# Run app at this IP address (http://127.0.0.1:5000/)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
-
-# The application works, all is needed to be done now is the below
-# Write a brief document explaining your application structure, how to run it, and how it addresses the objectives of the assignment.
-# Quality of your code: We'll look for clean, well-structured, and commented code that follows best practices.(look through make sure code has comments)
-# Documentation: Your write-up should be clear and easy to understand, providing sufficient detail for someone unfamiliar with your project to get it up and running.(READ.me)
-# Please submit your code in a private repository (GitHub, GitLab, Bitbucket, etc.) and share the access with us. Include all the source code, Dockerfiles, and the documentation in this repository. 
+    

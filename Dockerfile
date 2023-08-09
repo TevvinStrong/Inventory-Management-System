@@ -11,7 +11,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt && \
     pip install --no-cache-dir flask && \
     pip install --no-cache-dir flask-cors && \
-    pip install --no-cache-dir flask_restful
+    pip install --no-cache-dir flask_restful && \
+    pip install --no-cache-dir pymongo[srv]==3.12.0
     
 # Copy the rest of the application code into the container
 COPY . .

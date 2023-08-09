@@ -7,19 +7,20 @@
 </head>
 <body>
     <h5>Reeds: Inventory Management System</h5>
+    <!-- Input to search against porducts stored in the database -->
     <form method="POST" action="/">
         <input type="text" name="search_term" placeholder="Search product name">
         <button type="submit">Search</button>
     </form>    
-    <!-- Jump over to the add product page to add products to the inventory or update page to update products -->
-    <a href="/product" role="button"><button style="position: absolute; left: 17%; top: 60px;">Add Products</button></a>
-    <!-- Render products fetched from database by their name-->
+    <!-- Navigate to the add product page -->
+    <a href="/product" role="button"><button style="position: absolute; left: 223px; top: 60px;">Add Products</button></a>
+    <!-- Render products fetched from database -->
     <ul>
         {% for product_metric in product_metrics %}
         <li style="list-style-type: none;">{{ product_metric.product_name }}</li>
         {% endfor %}
     </ul>
-    <!-- Display Product Details -->
+    <!-- Display Product Details for each product once searched for -->
     <div id="details">
         {% if found_product %}
         <h2>Product Details</h2>
@@ -30,6 +31,7 @@
         <button id="close-details">Close</button>
         {% endif %}
     </div>
+    <!-- Event listener to close the product detail toast notification -->
     <script>
         const closeAnalyticsButton = document.getElementById('close-details');
         const analyticsSection = document.getElementById('details');

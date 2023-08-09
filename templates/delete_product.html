@@ -10,9 +10,9 @@
     <form id="delete-form" action="/products/{{ product.product_id }}/delete" method="POST">
         <button type="submit">Delete Product</button>
     </form>
-    
+    <!-- Navigate to the home page -->
     <a href="/">Go back to Home</a>
-    
+    <!-- Handle the deletion of a product from form submission -->
     <script>
         document.getElementById("delete-form").addEventListener("submit", function(event) {
             event.preventDefault();  // Prevent the default form submission
@@ -44,6 +44,5 @@
             }
         });
     </script>
-    
 </body>
 </html>
