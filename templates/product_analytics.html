@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Analytics</title>
+</head>
+<body>
+    <h1>Product Analytics</h1>
+
+    <table border="1">
+        <tr>
+            <th>Category</th>
+            <th>Total Count</th>
+            <th>Average Price</th>
+        </tr>
+        {% for category in analytics_data %}
+        <tr>
+            <td>{{ category.category }}</td>
+            <td>{{ category.total_count }}</td>
+            <td>{{ category.average_price | round(2) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/">Go back to Home</a>
+</body>
+</html>

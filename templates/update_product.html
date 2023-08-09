@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Product</title>
+</head>
+<body>
+    <!-- Add a div for displaying the success message -->
+    <div id="successMessage" style="display: none;">
+        <p>Product updated successfully!</p>
+    </div>
+    <h1>Update Product</h1>
+    <form id="update-form" action="/products/{{ product.product_id }}/update">
+        <label for="product_name">Product Name:</label>
+        <input type="text" name="product_name" value="{{ product.product_name }}" required><br>
+        
+        <label for="product_category">Product Category:</label>
+        <input type="text" name="product_category" value="{{ product.product_category }}" required><br>
+        
+        <label for="price">Price:</label>
+        <input type="number" name="price" step="0.01" value="{{ product.price }}" required><br>
+        
+        <label for="available_quantity">Available Quantity:</label>
+        <input type="number" name="available_quantity" value="{{ product.available_quantity }}" required><br>
+        
+        <button type="submit">Update Product</button>
+    </form>
+    <a href="/">Go back to Home</a>
+    <script>
+        document.getElementById("update-form").addEventListener("submit", function(event) {
+            event.preventDefault();  // Prevent the default form submission
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: "PUT",
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Product updated successfully, show success message
+                    const successMessage = document.getElementById("successMessage");
+                    successMessage.style.display = "block";
+                } else {
+                    // Handle error
+                    console.error("Error updating product");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>

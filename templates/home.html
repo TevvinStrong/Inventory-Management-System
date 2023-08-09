@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reeds - IMS</title>
+</head>
+<body>
+    <h5>Reeds: Inventory Management System</h5>
+    <form method="POST" action="/">
+        <input type="text" name="search_term" placeholder="Search product name">
+        <button type="submit">Search</button>
+    </form>    
+    <!-- Jump over to the add product page to add products to the inventory or update page to update products -->
+    <a href="/product" role="button"><button style="position: absolute; left: 17%; top: 60px;">Add Products</button></a>
+    <!-- Render products fetched from database by their name-->
+    <ul>
+        {% for product_metric in product_metrics %}
+        <li style="list-style-type: none;">{{ product_metric.product_name }}</li>
+        {% endfor %}
+    </ul>
+    <!-- Display Product Details -->
+    <div id="details">
+        {% if found_product %}
+        <h2>Product Details</h2>
+        <p>Product ID: {{ found_product.product_id }}</p>
+        <p>Product Category: {{ found_product.product_category }}</p>
+        <p>Price: {{ found_product.price }}</p>
+        <p>Available Quantity: {{ found_product.available_quantity }}</p>
+        <button id="close-details">Close</button>
+        {% endif %}
+    </div>
+    <script>
+        const closeAnalyticsButton = document.getElementById('close-details');
+        const analyticsSection = document.getElementById('details');
+        
+        closeAnalyticsButton.addEventListener('click', function() {
+            analyticsSection.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
