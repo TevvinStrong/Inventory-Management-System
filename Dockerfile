@@ -10,7 +10,6 @@ COPY requirements.txt .
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt && \
     pip install --no-cache-dir flask && \
-    pip install --no-cache-dir flask-cors && \
     pip install --no-cache-dir flask_restful && \
     pip install --no-cache-dir pymongo[srv]==3.12.0
     

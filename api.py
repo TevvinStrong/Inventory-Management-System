@@ -1,12 +1,9 @@
 # Import installed packages
 from flask import Flask, render_template, request, jsonify
-from flask_cors import CORS
 from pymongo import MongoClient
 
 # Initialize flask app
 app = Flask(__name__, template_folder="templates")
-# Prevent CORS errors
-CORS(app)
 
 # Establish MongoDB connection
 mongo_uri = "mongodb+srv://TevvinStrong:SuccessMoney1.@cluster0.tqcutev.mongodb.net/"
