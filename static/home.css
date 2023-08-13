@@ -1,0 +1,105 @@
+/* home.html */
+h5 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 25px;
+    color: #318DD0;
+    font-family: 'Inter', sans-serif;
+}
+
+.container {
+    background-color: #21345A;
+    height: 50%;
+}
+
+.container form input {
+    outline: none;
+    margin-top: 50px;
+    margin-left: 34%;
+    padding: 10px;
+    width: 30%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+::placeholder {
+    padding-left: 5px;
+    font-family: 'Inter', sans-serif;
+}
+
+.container form button {
+    padding: 10px;
+    position: absolute;
+    top: 163px;
+    left: 58%;
+    background-color: #318DD0;
+    border: 1px solid #318DD0;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.container button {
+    padding: 18px;
+    position: absolute;
+    left: 80%;
+    top: 28px;
+    width: 8%;
+    background-color: #FB6C37;
+    border: 1px solid #FB6C37;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.container ul {
+    width: 33%;
+    height: 512px;
+    text-align: center;
+    padding: 40px;
+    margin: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.container ul li {
+    list-style-type: none;
+    color: #fff;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    padding: 5px;
+    margin: 5px;
+}
+
+#details {
+    text-align: center;
+    font-weight: 400;
+    font-size: 15px;
+    color: #318DD0;
+    font-family: 'Inter', sans-serif;
+}
+
+#details button {
+    padding: 5px;
+    margin-bottom: 20px;
+    width: 5%;
+    background-color: #FB6C37;
+    border: 1px solid #FB6C37;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}

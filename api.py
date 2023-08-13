@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
 
 # Initialize flask app
-app = Flask(__name__, template_folder="templates")
+app = Flask(__name__, template_folder="templates", static_url_path='/static')
 
 # Establish MongoDB connection
 mongo_uri = "mongodb+srv://TevvinStrong:SuccessMoney1.@cluster0.tqcutev.mongodb.net/"

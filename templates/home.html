@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
     <title>Reeds - IMS</title>
 </head>
+
 <body>
-    <h5>Reeds: Inventory Management System</h5>
-    <!-- Input to search against porducts stored in the database -->
-    <form method="POST" action="/">
-        <input type="text" name="search_term" placeholder="Search product name">
-        <button type="submit">Search</button>
-    </form>    
-    <!-- Navigate to the add product page -->
-    <a href="/product" role="button"><button style="position: absolute; left: 223px; top: 60px;">Add Products</button></a>
-    <!-- Render products fetched from database -->
-    <ul>
-        {% for product_metric in product_metrics %}
-        <li style="list-style-type: none;">{{ product_metric.product_name }}</li>
-        {% endfor %}
-    </ul>
+    <h5>Reeds Inventory Management System</h5>
+    <div class="container">
+        <!-- Input to search against porducts stored in the database -->
+        <form method="POST" action="/">
+            <input class="homeInput" type="text" name="search_term" placeholder="Search product name">
+            <button class="homeButton" type="submit">Search</button>
+        </form>
+        <!-- Navigate to the add product page -->
+        <a href="/product" role="button"><button>Add Products</button></a>
+        <!-- Render products fetched from database -->
+        <ul>
+            {% for product_metric in product_metrics %}
+            <li style="list-style-type: none;">{{ product_metric.product_name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
     <!-- Display Product Details for each product once searched for -->
     <div id="details">
         {% if found_product %}
-        <h2>Product Details</h2>
+        <h2>Product Details:</h2>
         <p>Product ID: {{ found_product.product_id }}</p>
         <p>Product Category: {{ found_product.product_category }}</p>
         <p>Price: {{ found_product.price }}</p>
@@ -35,10 +43,11 @@
     <script>
         const closeAnalyticsButton = document.getElementById('close-details');
         const analyticsSection = document.getElementById('details');
-        
-        closeAnalyticsButton.addEventListener('click', function() {
+
+        closeAnalyticsButton.addEventListener('click', function () {
             analyticsSection.style.display = 'none';
         });
     </script>
 </body>
+
 </html>
