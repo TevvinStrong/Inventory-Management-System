@@ -11,7 +11,7 @@ The application consists of the following components:
 - This folder contains the HTML templates used for rendering the user interface for adding, updating, and deleting products, as well as for displaying product analytics.
 
 ### Static Files (static/):
-- This folder contains static files such as CSS stylesheets and JavaScript files used for enhancing the user interface.
+- This folder contains static files such as CSS stylesheets used for enhancing the user interface.
 
 ### Dockerfile (Dockerfile):
 - This file defines the Docker image for the application. It specifies the base image, installs necessary dependencies, copies application files into the image, and sets the entry point to run the Flask application.
@@ -20,7 +20,7 @@ The application consists of the following components:
 - This file lists the required Python packages and their versions. It is used to install the required packages when building the Docker image.
 
 ### Prerequisites:
-1. Docker: Ensure you have Docker installed on your machine. If not, you can download and install it from the official website.
+1. Docker: Ensure you have Docker installed on your machine. If not, you can download and install it from the official website: https://www.docker.com/.
 
 # Step-by-Step Setup(How to Run):
 ### Clone the Repository:
