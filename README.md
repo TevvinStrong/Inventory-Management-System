@@ -67,10 +67,12 @@ This command starts the application within a Docker container and maps port 5000
 
 - ### Product Analytics:
     Last but not least, to view the products analytics all is needed is to key in this URL to view the page:
-    `http://127.0.0.1:5000/products/analytics`
-
+    `http://127.0.0.1:5000/products/analytics`.
     Do keep in mind that you will need some product data populated in your local database for the analytics page to pull in each product metrics.
 
+- ### Using MongoDB Compass:
+    Ensure you have MongoDB Compass installed on your machine. Download and install it from `https://www.mongodb.com/products/compass`. Open MongoDB Compass and click "New Connection."
+    In the "Connection String" input, paste the URI found in your api.py file (e.g., mongodb+srv://<username>:<password>@cluster0.tqcutev.mongodb.net/). Click "Connect" to access your Flask database. In MongoDB Compass, navigate to the Inventory database and the productMetrics collection to review your stored data. Use MongoDB Compass to ensure data accuracy and make corrections if needed.
 
 # Conclusion
 In conclusion, the "Inventory Management System with Product Analytics" application fulfills the assignment objectives by providing a functional inventory management system with CRUD operations, product analytics, full-text search, and a user-friendly interface. The application is built using Flask and MongoDB, and it can be run in a Docker container for easy deployment.
